@@ -1,0 +1,29 @@
+specVersion: 0.35.0
+name: demo-springboot
+runtime: springboot
+registry: gcr.io
+image: asia.gcr.io/friendly-magnet-377405/echo:latest
+imageDigest: sha256:cc34c51ee9d8b6d769c1b1846a46ceb7989ea37377478cd1b4ec06f9e6fd7c56
+created: 2023-02-10T11:37:57.18639+05:30
+build:
+  buildpacks: []
+  builder: pack
+  buildEnvs:
+  - name: BP_NATIVE_IMAGE
+    value: "false"
+  - name: BP_JVM_VERSION
+    value: "17"
+  - name: BP_MAVEN_BUILD_ARGUMENTS
+    value: -Pnative -Dmaven.test.skip=true --no-transfer-progress package
+run:
+  volumes: []
+  envs: []
+deploy:
+  namespace: default
+  remote: false
+  annotations: {}
+  options: {}
+  labels: []
+  healthEndpoints:
+    liveness: /actuator/health
+    readiness: /actuator/health
